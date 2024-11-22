@@ -2,7 +2,7 @@
   List<Map<String, String>> images = [
     {
       "image": "assets/onboarding/shoese_one.png",
-      "title": "Nike Shoese",
+      "title": "Start Journey With Nike",
       "des":
           "Smart, Gorgeous & Fashionable\nCollection"
     },
@@ -14,7 +14,7 @@
     },
     {
       "image": "assets/onboarding/shoese_three.png",
-      "title": "Summer a new Shoes Nike ",
+      "title": "Summer Shoes Nike 2022",
       "des": "Amet Minim Lit Nodeseru Saku Nandu sit Alique Dolor"
     }
   ];

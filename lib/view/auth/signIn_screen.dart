@@ -1,4 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
+import 'package:ecommerce_app/view/auth/create_account_screen.dart';
+import 'package:ecommerce_app/view/auth/recover_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -99,27 +101,32 @@ class SigninScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NavigationHelper.goTo(context, RecoverPasswordScreen());
+                    },
                     child: Text(
-                      "Recovery Password",
+                      "Recover Password",
                       style: TextStyle(color: Colors.grey, fontSize: 13.sp),
                     )),
               ),
               SizedBox(
                 height: 20.h,
               ),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 54.h,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Center(
-                    child: Text(
-                      "Sign In",
-                      style: TextStyle(fontSize: 18.sp, color: Colors.white),
-                    ),
-                  )),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 54.h,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Center(
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(fontSize: 18.sp, color: Colors.white),
+                      ),
+                    )),
+              ),
               SizedBox(
                 height: 20.h,
               ),
@@ -160,9 +167,11 @@ class SigninScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        NavigationHelper.goTo(context, CreateAccountScreen());
+                      },
                       child: Text(
-                        "Sign Up for free",
+                        "Sign up for free",
                         style: TextStyle(color: Colors.white, fontSize: 16.sp),
                       ))
                 ],

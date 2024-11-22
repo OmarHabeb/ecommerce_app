@@ -106,7 +106,7 @@ class _StartState extends State<OnboardingScreen> {
                           color: Colors.blue,
                         ),
                         child: Center(
-                          child: Text(
+                          child:  Text(
                             "Next",
                             style: TextStyle(color: Colors.white, fontSize: 22),
                           ),
