@@ -12,17 +12,15 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 335.w,
+      width: MediaQuery.of(context).size.width,
       height: 54.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50.w),
-      color: Color.fromRGBO(91, 158, 225, 1)
-      ),
+          borderRadius: BorderRadius.circular(50.w), color: Colors.blue),
       child: Center(
           child: Text(
         text,
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.sp),
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.sp),
       )),
     );
   }

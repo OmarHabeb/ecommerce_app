@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
+import 'package:ecommerce_app/view/screens/auth/verification_code_%D9%8Dscreen.dart';
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/text_field_with_image.dart';
@@ -41,7 +43,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                       color: Color.fromRGBO(112, 123, 129, 1),
                     ),
                   )),
-                     Center(
+                  Center(
                       child: Text(
                     "Recieve a Verification Code",
                     style: TextStyle(
@@ -54,11 +56,17 @@ class RecoverPasswordScreen extends StatelessWidget {
               SizedBox(
                 height: 50.h,
               ),
-             TextFieldWithImage(labelText: "Email Address",),
-               SizedBox(
+              TextFieldWithImage(
+                labelText: "Email Address",
+              ),
+              SizedBox(
                 height: 50.h,
               ),
-             CustomButton(text: "Continue")
+              GestureDetector(
+                  onTap: () {
+                    NavigationHelper.goTo(context, verification_code());
+                  },
+                  child: CustomButton(text: "Continue"))
             ],
           ),
         ),

@@ -1,12 +1,22 @@
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
-import 'package:ecommerce_app/view/auth/create_account_screen.dart';
-import 'package:ecommerce_app/view/auth/recover_password_screen.dart';
+import 'package:ecommerce_app/view/screens/auth/create_account_screen.dart';
+import 'package:ecommerce_app/view/screens/auth/recover_password_screen.dart';
+import 'package:ecommerce_app/view/widgets/custom_button.dart';
+import 'package:ecommerce_app/view/widgets/text_field_with_image.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SigninScreen extends StatelessWidget {
+class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
 
+  @override
+  State<SigninScreen> createState() => _SigninScreenState();
+}
+
+class _SigninScreenState extends State<SigninScreen> {
+  bool _isPasswordVisible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,59 +52,33 @@ class SigninScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 50.h,
+                height: 100.h,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Email Address",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                        fillColor: Color(0xff161F28),
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide(color: Color(0xff161F28)),
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xff161F28)),
-                            borderRadius: BorderRadius.circular(50))),
+                  TextFieldWithImage(
+                    labelText: "Email Address",
                   ),
                   SizedBox(
                     height: 30.h,
                   ),
-                  Text(
-                    "Password",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                        fillColor: Color(0xff161F28),
-                        filled: true,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide(color: Color(0xff161F28)),
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xff161F28)),
-                            borderRadius: BorderRadius.circular(50))),
+                  TextFieldWithImage(
+                    labelText: "Password",
+                    obscureText: _isPasswordVisible,
+                    ic: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                        child: _isPasswordVisible == false
+                            ? Icon(
+                                Icons.visibility_off,
+                              )
+                            : Icon(
+                                Icons.visibility,
+                              )),
                   ),
                 ],
               ),
@@ -105,7 +89,7 @@ class SigninScreen extends StatelessWidget {
                       NavigationHelper.goTo(context, RecoverPasswordScreen());
                     },
                     child: Text(
-                      "Recover Password",
+                      "Forget Password",
                       style: TextStyle(color: Colors.grey, fontSize: 13.sp),
                     )),
               ),
@@ -113,20 +97,10 @@ class SigninScreen extends StatelessWidget {
                 height: 20.h,
               ),
               GestureDetector(
-                onTap: () {},
-                child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 54.h,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Center(
-                      child: Text(
-                        "Sign In",
-                        style: TextStyle(fontSize: 18.sp, color: Colors.white),
-                      ),
-                    )),
-              ),
+                  onTap: () {},
+                  child: CustomButton(
+                    text: "Sign In",
+                  )),
               SizedBox(
                 height: 20.h,
               ),

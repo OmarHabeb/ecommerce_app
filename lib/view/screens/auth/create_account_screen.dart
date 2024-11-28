@@ -1,11 +1,10 @@
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
-import 'package:ecommerce_app/view/auth/signIn_screen.dart';
+import 'package:ecommerce_app/view/screens/auth/signIn_screen.dart';
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
+import 'package:ecommerce_app/view/widgets/custom_button.dart';
 import 'package:ecommerce_app/view/widgets/text_field_with_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../widgets/custom_button.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -83,7 +82,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ),
               SizedBox(height: 60.h),
               CustomButton(
-                text: "Sign In",
+                text: "Sign up",
               ),
               SizedBox(height: 25.h),
               Container(
@@ -107,7 +106,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         width: 10,
                       ),
                       Text(
-                        "Sign in with google",
+                        "Sign up with google",
                         style: TextStyle(fontSize: 18.sp, color: Colors.white),
                       ),
                     ],
@@ -119,12 +118,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    "Already have an account?",
                     style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
                   TextButton(
                       onPressed: () {
-                        NavigationHelper.goTo(context, SigninScreen());
+                        NavigationHelper.goOffAll(context, SigninScreen());
                       },
                       child: Text(
                         "Sign in for free",

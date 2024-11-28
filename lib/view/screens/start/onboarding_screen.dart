@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
-import 'package:ecommerce_app/view/auth/signIn_screen.dart';
-import 'package:ecommerce_app/view/start/data.dart';
+import 'package:ecommerce_app/view/screens/auth/signIn_screen.dart';
+import 'package:ecommerce_app/view/screens/start/data.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

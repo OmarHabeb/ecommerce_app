@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/view/start/data.dart';
+
+import 'package:ecommerce_app/view/screens/start/data.dart';
 import 'package:flutter/material.dart';
 
 class Onboardingtest extends StatefulWidget {

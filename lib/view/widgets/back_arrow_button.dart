@@ -8,19 +8,17 @@ class BackArrowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 44.w,
-      height: 44.h,
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(22, 31, 40, 1),
-        shape: BoxShape.circle
-      ),
-      child: GestureDetector(
-        onTap: onTap ?? () => Navigator.of(context).pop(),
+    return GestureDetector(
+      onTap: onTap ?? () => Navigator.of(context).pop(),
+      child: Container(
+        width: 44.w,
+        height: 44.h,
+        decoration: BoxDecoration(
+            color: Color.fromRGBO(22, 31, 40, 1), shape: BoxShape.circle),
         child: Icon(
           Icons.arrow_back_ios_new_rounded,
-          color: Colors.white, 
-          size: 17, 
+          color: Colors.white,
+          size: 17,
         ),
       ),
     );
