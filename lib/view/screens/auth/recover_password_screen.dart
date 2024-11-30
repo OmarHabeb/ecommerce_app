@@ -2,7 +2,7 @@ import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
 import 'package:ecommerce_app/view/screens/auth/verification_code_%D9%8Dscreen.dart';
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
-import 'package:ecommerce_app/view/widgets/text_field_with_image.dart';
+import 'package:ecommerce_app/view/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

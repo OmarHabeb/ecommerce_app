@@ -1,137 +1,191 @@
+import 'package:ecommerce_app/controllers/auth/signup_cubit/cubit/signup_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
-import 'package:ecommerce_app/view/screens/auth/signIn_screen.dart';
+import 'package:ecommerce_app/view/screens/auth/signin_screen.dart';
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
-import 'package:ecommerce_app/view/widgets/text_field_with_image.dart';
+import 'package:ecommerce_app/view/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CreateAccountScreen extends StatefulWidget {
-  const CreateAccountScreen({super.key});
+class CreateAccountScreen extends StatelessWidget {
+  CreateAccountScreen({super.key});
 
-  @override
-  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
-}
-
-class _CreateAccountScreenState extends State<CreateAccountScreen> {
-  bool _isPasswordVisible = false;
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final ValueNotifier<bool> isPasswordVisible = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20.h,
-              ),
-              BackArrowButton(),
-              SizedBox(
-                height: 20.h,
-              ),
-              Center(
-                  child: Text(
-                "Create Account",
-                style: TextStyle(
-                  fontSize: 28.sp,
-                  color: Colors.white,
-                ),
-              )),
-              Center(
-                  child: Text(
-                "Let’s Create Account Together",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: Color.fromRGBO(112, 123, 129, 1),
-                ),
-              )),
-              SizedBox(
-                height: 50.h,
-              ),
-              TextFieldWithImage(
-                labelText: "Your Name",
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              TextFieldWithImage(
-                labelText: "Email Address",
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              TextFieldWithImage(
-                labelText: "Password",
-                obscureText: _isPasswordVisible,
-                ic: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                    child: _isPasswordVisible == false
-                        ? Icon(
-                            Icons.visibility,
-                          )
-                        : Icon(
-                            Icons.visibility_off,
-                          )),
-              ),
-              SizedBox(height: 60.h),
-              CustomButton(
-                text: "Sign up",
-              ),
-              SizedBox(height: 25.h),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 54.h,
-                  decoration: BoxDecoration(
-                      color: Color(0xff161F28),
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 24.w,
-                        height: 24.h,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage("assets/auth/goole.png"),
-                        )),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Sign up with google",
-                        style: TextStyle(fontSize: 18.sp, color: Colors.white),
-                      ),
-                    ],
-                  )),
-              SizedBox(
-                height: 60.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account?",
-                    style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+          padding:  EdgeInsets.all(20.0),
+          child: BlocConsumer<SignupCubit, SignupState>(
+            listener: (context, state) {
+              if (state is onSignupLoading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return  Center(child: CircularProgressIndicator());
+                  },
+                );
+              } else if (state is onSignupSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Account created successfully!",
+                        style: TextStyle(color: Colors.green)),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        NavigationHelper.goOffAll(context, SigninScreen());
-                      },
+                );
+
+                NavigationHelper.goTo(context, SigninScreen());
+              } else if (state is onSignupError) {
+                Navigator.of(context, rootNavigator: true).pop();
+                // FE HNA ERROR FE EL IF STATES YA OMAR
+                String errorMessage =
+                    "An error occurred. Please try again later.";
+                if (state.errorMessage == "user_already_exists") {
+                  errorMessage = "This email is already in use.";
+                } else if (state.errorMessage == "network_error") {
+                  errorMessage = "Network error. Please check your connection.";
+                }
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(errorMessage)),
+                );
+              }
+            },
+            builder: (context, state) {
+              var cubit = SignupCubit.get(context);
+              return Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20.h),
+                    BackArrowButton(),
+                    SizedBox(height: 20.h),
+                    Center(
                       child: Text(
-                        "Sign in for free",
-                        style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                      ))
-                ],
-              )
-            ],
+                        "Create Account",
+                        style: TextStyle(fontSize: 28.sp, color: Colors.white),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        "Let’s Create Account Together",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color.fromRGBO(112, 123, 129, 1),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 50.h),
+                    TextFieldWithImage(
+                      obscureText: false,
+                      controller: userNameController,
+                      labelText: "Your Name",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Name is required";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 30.h),
+                    TextFieldWithImage(
+                      obscureText: false,
+                      controller: emailController,
+                      labelText: "Email Address",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email is required";
+                        }
+                        final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                        if (!emailRegex.hasMatch(value)) {
+                          return "Enter a valid email address";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 30.h),
+                    ValueListenableBuilder<bool>(
+                      valueListenable: isPasswordVisible,
+                      builder: (context, isVisible, child) {
+                        return TextFieldWithImage(
+                          controller: passwordController,
+                          labelText: "Password",
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Password is required";
+                            }
+                            if (value.length < 6) {
+                              return "Password must have more than 6 characters";
+                            }
+                            return null;
+                          },
+                          obscureText: !isVisible,
+                          ic: GestureDetector(
+                            onTap: () => isPasswordVisible.value = !isVisible,
+                            child: Icon(
+                              isVisible
+                                  ? Icons.visibility 
+                                  : Icons.visibility_off
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 60.h),
+                    CustomButton(
+                      text: "Sign up",
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          cubit.signupUser(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            userName: userNameController.text,
+                          );
+                        } else {
+                          print("Error");
+                        }
+                      },
+                    ),
+                    SizedBox(height: 25.h),
+                    CustomButton(text: "Sign up with google", image: "assets/auth/goole.png", color: Color.fromRGBO(22, 31, 40, 1),),
+                 
+                    SizedBox(height: 40.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            NavigationHelper.goOffAll(
+                              context,
+                               SigninScreen(),
+                            );
+                          },
+                          child: Text(
+                            "Sign in for free",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),

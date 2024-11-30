@@ -6,10 +6,12 @@ class TextFieldWithImage extends StatelessWidget {
   final bool obscureText;
   final String? image;
   final Widget? ic;
+  final FormFieldValidator<String>? validator;
  final TextEditingController? controller;
   const TextFieldWithImage(
       {super.key,
       required this.labelText,
+      this.validator,
       this.obscureText = true,
       this.image,
       this.ic,  this.controller});
@@ -18,6 +20,7 @@ class TextFieldWithImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       style: TextStyle(color: Colors.white),
+      validator: validator,
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
