@@ -44,17 +44,24 @@ class CreateAccountScreen extends StatelessWidget {
                 NavigationHelper.goTo(context, SigninScreen());
               } else if (state is onSignupError) {
                 Navigator.of(context, rootNavigator: true).pop();
-                // FE HNA ERROR FE EL IF STATES YA OMAR
-                String errorMessage =
-                    "An error occurred. Please try again later.";
-                if (state.errorMessage == "user_already_exists") {
-                  errorMessage = "This email is already in use.";
-                } else if (state.errorMessage == "network_error") {
-                  errorMessage = "Network error. Please check your connection.";
-                }
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(errorMessage)),
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Signup failed'),
+                      content: Text(
+                          "${state.errorMessage}"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true).pop();
+                          },
+                          child: Text('Close'),
+                        ),
+                      ],
+                    );
+                  },
                 );
               }
             },
@@ -155,7 +162,7 @@ class CreateAccountScreen extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 25.h),
-                    CustomButton(text: "Sign up with google", image: "assets/auth/goole.png", color: Color.fromRGBO(22, 31, 40, 1),),
+                    CustomButton(text: "Sign up with google", image: "assets/auth/google.png", color: Color.fromRGBO(22, 31, 40, 1),),
                  
                     SizedBox(height: 40.h),
                     Row(

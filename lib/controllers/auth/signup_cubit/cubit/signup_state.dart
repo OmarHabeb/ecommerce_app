@@ -8,6 +8,5 @@ class onSignupLoading extends SignupState {}
 final class onSignupSuccess extends SignupState {}
 final class onSignupError extends SignupState {
   final String errorMessage;
-
   onSignupError(this.errorMessage);
 }

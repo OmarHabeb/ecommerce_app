@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,11 +21,11 @@ class SignupCubit extends Cubit<SignupState> {
         }
       );
       emit(onSignupSuccess());
-    } catch (e) {
-      emit(onSignupError(e.toString()));
-      log(e.toString());
-      
-    }
+    } on AuthException catch (authError) {
+      emit(onSignupError(authError.message));
+    } on Exception catch (e) {
+    emit(onSignupError("An unexpected error occurred: ${e.toString()}"));
+  }
   }
 }
 

@@ -45,14 +45,13 @@ class SigninScreen extends StatelessWidget {
               } else if (state is onLoginFailure) {
                 Navigator.of(context, rootNavigator: true).pop();
 
-                String errorMessage =
-                    "An error occurred. Please try again later.";
                 showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
                       title: Text('Login failed'),
-                      content: Text(errorMessage),
+                      content: Text(
+                          "${state.errorMessage + state.errorCode.toString()}"),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -156,7 +155,7 @@ class SigninScreen extends StatelessWidget {
                       text: "Sign In",
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          cubit.loginUser(
+                          cubit.loginUserWithEmail(
                               email: emailController.text,
                               password: passwordController.text);
                         }
@@ -167,8 +166,11 @@ class SigninScreen extends StatelessWidget {
                     ),
                     CustomButton(
                       text: "Sign up with google",
-                      image: "assets/auth/goole.png",
+                      image: "assets/auth/google.png",
                       color: Color.fromRGBO(22, 31, 40, 1),
+                      onTap: () {
+                        cubit.loginUserWithGoogle();
+                      },
                     ),
                     SizedBox(
                       height: 50.h,

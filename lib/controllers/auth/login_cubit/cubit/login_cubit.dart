@@ -10,7 +10,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
    static LoginCubit get(context) => BlocProvider.of(context);
 
-     Future<void> loginUser({required String email, required String password}) async {
+     Future<void> loginUserWithEmail({required String email, required String password}) async {
       emit(onLoginLoading());
     try {
       await Supabase.instance.client.auth
@@ -21,10 +21,24 @@ class LoginCubit extends Cubit<LoginState> {
           emit(onLoginSuccess());
         },
       );
-    } catch (e) {
-      emit(onLoginFailure());
-      log(e.toString());
-      print("$e error occured");
-    }
+    } on AuthException catch (authError) {
+      emit(onLoginFailure("${authError.message} \nError code: ", errorCode:  authError.statusCode));
+    }  on Exception catch (e) {
+    emit(onLoginFailure("An unexpected error occurred: ${e.toString()}", ));
   }
+  }
+
+   Future<void> loginUserWithGoogle() async {
+      emit(onLoginLoading());
+    try {
+      await Supabase.instance.client.auth.signInWithOAuth(OAuthProvider.google);
+   
+    } on AuthException catch (authError){
+      emit(onLoginFailure("Login Error: ${authError.message}"));
+    } on Exception catch (e) {
+    emit(onLoginFailure("An unexpected error occurred: ${e.toString()}"));
+  }
+  }
+
+ 
 }
