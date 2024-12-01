@@ -91,7 +91,7 @@ class CreateAccountScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 50.h),
-                    TextFieldWithImage(
+                    CustomTextField(
                       obscureText: false,
                       controller: userNameController,
                       labelText: "Your Name",
@@ -103,7 +103,7 @@ class CreateAccountScreen extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 30.h),
-                    TextFieldWithImage(
+                    CustomTextField(
                       obscureText: false,
                       controller: emailController,
                       labelText: "Email Address",
@@ -122,7 +122,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ValueListenableBuilder<bool>(
                       valueListenable: isPasswordVisible,
                       builder: (context, isVisible, child) {
-                        return TextFieldWithImage(
+                        return CustomTextField(
                           controller: passwordController,
                           labelText: "Password",
                           validator: (value) {

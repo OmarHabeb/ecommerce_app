@@ -51,7 +51,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
               SizedBox(
                 height: 50.h,
               ),
-              TextFieldWithImage(
+              CustomTextField(
                 labelText: "Password",
                 controller: passwordController,
                 obscureText: password,
@@ -72,7 +72,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
               SizedBox(
                 height: 20.h,
               ),
-              TextFieldWithImage(
+              CustomTextField(
                 labelText: "ConfirmPassword",
                 controller: confirmPasswordController,
                 obscureText: confirmPassword,
@@ -115,7 +115,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                         ));
                       }
                     },
-                    child: CustomButton(text: "Go to signin again")),
+                    child: CustomButton(text: "Go to signin again", )),
               )
             ],
           ),

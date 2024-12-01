@@ -97,7 +97,7 @@ class SigninScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextFieldWithImage(
+                        CustomTextField(
                           controller: emailController,
                           obscureText: false,
                           labelText: "Email Address",
@@ -114,7 +114,7 @@ class SigninScreen extends StatelessWidget {
                         ValueListenableBuilder<bool>(
                           valueListenable: isPasswordVisible,
                           builder: (context, isVisible, child) {
-                            return TextFieldWithImage(
+                            return CustomTextField(
                               controller: passwordController,
                               labelText: "Password",
                               obscureText: !isVisible,

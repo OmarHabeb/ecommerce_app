@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TextFieldWithImage extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final String labelText;
   final bool obscureText;
-  final String? image;
   final Widget? ic;
   final FormFieldValidator<String>? validator;
  final TextEditingController? controller;
-  const TextFieldWithImage(
+  const CustomTextField(
       {super.key,
       required this.labelText,
       this.validator,
       this.obscureText = true,
-      this.image,
       this.ic,  this.controller});
 
   @override
@@ -27,7 +25,6 @@ class TextFieldWithImage extends StatelessWidget {
         labelText: labelText,
         labelStyle: TextStyle(color: Colors.white),
         suffixIcon: ic != null ? ic : null,
-        prefixIcon: image != null ? Image(image: AssetImage("$image")) : null,
         hintStyle: TextStyle(
           color: Colors.white,
           fontSize: 16.sp,

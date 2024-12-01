@@ -117,7 +117,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                     SizedBox(
                       height: 50.h,
                     ),
-                    TextFieldWithImage(
+                    CustomTextField(
                       obscureText: false,
                       controller: emailController,
                       labelText: "Email Address",

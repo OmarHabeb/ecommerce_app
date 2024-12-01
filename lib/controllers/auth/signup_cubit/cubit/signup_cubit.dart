@@ -16,7 +16,7 @@ class SignupCubit extends Cubit<SignupState> {
       await Supabase.instance.client.auth.signUp(
         password: password,
         email: email,
-        data: {
+         data: {
           'display_name': userName
         }
       );

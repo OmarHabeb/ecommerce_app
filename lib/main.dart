@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/controllers/auth/auth_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/forget_password_cubit/cubit/forget_password_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/signup_cubit/cubit/signup_cubit.dart';
@@ -25,9 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => AuthCubit(),
-        ),
+      
         BlocProvider(
           create: (context) => SignupCubit(),
         ),
