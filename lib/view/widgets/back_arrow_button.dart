@@ -14,7 +14,7 @@ class BackArrowButton extends StatelessWidget {
         width: 44.w,
         height: 44.h,
         decoration: BoxDecoration(
-            color: Color.fromRGBO(22, 31, 40, 1), shape: BoxShape.circle),
+            color:Color(0xFF8C6658), shape: BoxShape.circle),
         child: Icon(
           Icons.arrow_back_ios_new_rounded,
           color: Colors.white,

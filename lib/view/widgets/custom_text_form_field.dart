@@ -4,15 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomTextField extends StatelessWidget {
   final String labelText;
   final bool obscureText;
+  final Widget? prefix;
   final Widget? ic;
   final FormFieldValidator<String>? validator;
- final TextEditingController? controller;
+  final TextEditingController? controller;
   const CustomTextField(
       {super.key,
       required this.labelText,
       this.validator,
       this.obscureText = true,
-      this.ic,  this.controller});
+      this.ic,
+      this.controller,
+      this.prefix});
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +27,13 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(color: Colors.white),
+        prefixIcon: prefix != null ? prefix : null,
         suffixIcon: ic != null ? ic : null,
         hintStyle: TextStyle(
           color: Colors.white,
           fontSize: 16.sp,
         ),
-        fillColor: Color.fromRGBO(22, 31, 40, 1),
+        fillColor: Color(0xFF8C6658),
         filled: true,
         contentPadding: EdgeInsets.symmetric(
           vertical: 18.h,
@@ -48,7 +52,7 @@ class CustomTextField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20.r),
           borderSide: BorderSide(
-            color: Colors.blue,
+            color:  Color(0xFF8C6658),
             width: 2.0.w,
           ),
         ),

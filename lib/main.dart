@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/controllers/auth/forget_password_cubit/cubit/forget_password_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/signup_cubit/cubit/signup_cubit.dart';
+import 'package:ecommerce_app/view/screens/app/navigatorBar.dart';
 import 'package:ecommerce_app/view/screens/start/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-      
         BlocProvider(
           create: (context) => SignupCubit(),
         ),
@@ -41,12 +41,12 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         child: MaterialApp(
           theme: ThemeData(
-            scaffoldBackgroundColor: Color(0xFF1A2530),
+            scaffoldBackgroundColor: Color(0xFF1A1A1A),
             appBarTheme: AppBarTheme(color: Color(0xFF1A2530)),
             iconTheme: IconThemeData(color: Colors.white),
           ),
           debugShowCheckedModeBanner: false,
-          home: OnboardingScreen(),
+          home: navigator(),
         ),
       ),
     );
