@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
 import 'package:ecommerce_app/view/screens/app/home/custom_container.dart';
 import 'package:ecommerce_app/view/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -60,19 +62,31 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: 200.h,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomContainer(),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    CustomContainer(),
-                  ],
-                ),
+              BlocBuilder<ProductsCubit, ProductsState>(
+                builder: (context, state) {
+                  var cubit = ProductsCubit.get(context);
+                  cubit.getProducts();
+                  return state is GetProcuctsSuccess
+                      ? Container(
+                          height: 200.h,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: cubit.products.length,
+                              itemBuilder: (context, index) {
+                                return CustomContainer(
+                                  image: cubit.products[index].imageUrl!,
+                                  title: cubit.products[index].name!,
+                                  price: cubit.products[index].price!,
+                                );
+                              }))
+                      : Container(
+                          width: 100,
+                          height: 100,
+                          color: Colors.white,
+                          child: Center(child: Text("error")),
+                        );
+                },
               ),
               SizedBox(
                 height: 20.h,

@@ -10,7 +10,7 @@ class DioHelper {
 
   static initDioHelper() {
     dio = Dio(BaseOptions(
-        baseUrl: "https://yrbsbxbmzjkyzrxxillg.supabase.co/rest/v1/",
+        baseUrl: "https://yrbsbxbmzjkyzrxxillg.supabase.co",
         receiveDataWhenStatusError: true,
         // headers: {
         //   //  "Authorization": 'Bearer ',

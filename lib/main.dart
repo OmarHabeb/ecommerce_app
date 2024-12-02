@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/controllers/auth/forget_password_cubit/cubit/forget_password_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/signup_cubit/cubit/signup_cubit.dart';
+import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
 import 'package:ecommerce_app/view/screens/app/navigatorBar.dart';
 import 'package:ecommerce_app/view/screens/start/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ForgetPasswordCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ProductsCubit(),
         ),
       ],
       child: ScreenUtilInit(

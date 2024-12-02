@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomContainer extends StatelessWidget {
-  const CustomContainer({super.key});
+  final String image;
+  final String title;
+  final double price;
+  CustomContainer(
+      {required this.image, required this.title, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +22,23 @@ class CustomContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //   width: ,
-              // )
-
-
+              Container(
+                width: 137.w,
+                height: 100.h,
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage(image))),
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFF2F2F2)),
+              ),
+              Text(
+                price.toString(),
+                style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+              )
             ],
           ),
         ),
