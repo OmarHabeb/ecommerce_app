@@ -60,15 +60,19 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomContainer(),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  CustomContainer(),
-                ],
+              Container(
+                height: 200.h,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomContainer(),
+                    SizedBox(
+                      width: 15.w,
+                    ),
+                    CustomContainer(),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20.h,

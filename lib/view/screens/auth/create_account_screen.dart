@@ -22,7 +22,7 @@ class CreateAccountScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0),
           child: BlocConsumer<SignupCubit, SignupState>(
             listener: (context, state) {
               if (state is onSignupLoading) {
@@ -30,7 +30,7 @@ class CreateAccountScreen extends StatelessWidget {
                   context: context,
                   barrierDismissible: false,
                   builder: (context) {
-                    return  Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator());
                   },
                 );
               } else if (state is onSignupSuccess) {
@@ -50,8 +50,7 @@ class CreateAccountScreen extends StatelessWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: Text('Signup failed'),
-                      content: Text(
-                          "${state.errorMessage}"),
+                      content: Text("${state.errorMessage}"),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -137,11 +136,9 @@ class CreateAccountScreen extends StatelessWidget {
                           obscureText: !isVisible,
                           ic: GestureDetector(
                             onTap: () => isPasswordVisible.value = !isVisible,
-                            child: Icon(
-                              isVisible
-                                  ? Icons.visibility 
-                                  : Icons.visibility_off
-                            ),
+                            child: Icon(isVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off),
                           ),
                         );
                       },
@@ -162,8 +159,11 @@ class CreateAccountScreen extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 25.h),
-                    CustomButton(text: "Sign up with google", image: "assets/auth/google.png", color: Color.fromRGBO(22, 31, 40, 1),),
-                 
+                    CustomButton(
+                      text: "Sign up with google",
+                      image: "assets/auth/google.png",
+                      color: Colors.black.withOpacity(0.1),
+                    ),
                     SizedBox(height: 40.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +176,7 @@ class CreateAccountScreen extends StatelessWidget {
                           onPressed: () {
                             NavigationHelper.goOffAll(
                               context,
-                               SigninScreen(),
+                              SigninScreen(),
                             );
                           },
                           child: Text(

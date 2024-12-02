@@ -20,10 +20,6 @@ class _StartState extends State<OnboardingScreen> {
         child: Container(
           padding: EdgeInsets.all(10.r),
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/background.png"),
-                  fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -89,7 +85,7 @@ class _StartState extends State<OnboardingScreen> {
                         width: 12.w,
                         decoration: BoxDecoration(
                           color:
-                              currentindex == index ? Colors.blue : Colors.grey,
+                              currentindex == index ? Color(0xFF8C6658) : Colors.grey,
                           shape: BoxShape.circle,
                         ),
                       );
@@ -104,10 +100,10 @@ class _StartState extends State<OnboardingScreen> {
                         height: 54.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50.w),
-                          color: Colors.blue,
+                          color:  Color(0xFF8C6658),
                         ),
                         child: Center(
-                          child:  Text(
+                          child: Text(
                             "Next",
                             style: TextStyle(color: Colors.white, fontSize: 22),
                           ),

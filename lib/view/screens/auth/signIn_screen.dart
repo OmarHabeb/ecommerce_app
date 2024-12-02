@@ -24,10 +24,6 @@ class SigninScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/background.png"),
-                  fit: BoxFit.cover)),
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is onLoginLoading) {
@@ -105,10 +101,10 @@ class SigninScreen extends StatelessWidget {
                             if (value == null || value.isEmpty) {
                               return "Please fill in  your email address";
                             }
-                         final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                        if (!emailRegex.hasMatch(value)) {
-                          return "Enter a valid email address";
-                        }
+                            final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                            if (!emailRegex.hasMatch(value)) {
+                              return "Enter a valid email address";
+                            }
                             return null;
                           },
                         ),
@@ -171,7 +167,7 @@ class SigninScreen extends StatelessWidget {
                     CustomButton(
                       text: "Sign up with google",
                       image: "assets/auth/google.png",
-                      color: Color.fromRGBO(22, 31, 40, 1),
+                      color: Colors.black.withOpacity(0.1),
                       onTap: () {
                         cubit.loginUserWithGoogle();
                       },

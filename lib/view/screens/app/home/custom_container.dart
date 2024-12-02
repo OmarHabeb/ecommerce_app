@@ -8,13 +8,22 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Expanded(
-          child: Container(
-            width: 157.w,
-            height: 200.h,
-            decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(15.w)),
+        Container(
+          padding: EdgeInsets.all(15.h),
+          width: 160.w,
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15.w)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Container(
+              //   width: ,
+              // )
+
+
+            ],
           ),
         ),
         Positioned(
