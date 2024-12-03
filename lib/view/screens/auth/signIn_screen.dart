@@ -152,6 +152,7 @@ class SigninScreen extends StatelessWidget {
                       height: 20.h,
                     ),
                     CustomButton(
+                      width: MediaQuery.of(context).size.width,
                       text: "Sign In",
                       onTap: () {
                         if (formKey.currentState!.validate()) {
@@ -165,6 +166,7 @@ class SigninScreen extends StatelessWidget {
                       height: 20.h,
                     ),
                     CustomButton(
+                      width: MediaQuery.of(context).size.width,
                       text: "Sign up with google",
                       image: "assets/auth/google.png",
                       color: Colors.black.withOpacity(0.1),

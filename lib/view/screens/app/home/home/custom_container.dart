@@ -14,12 +14,12 @@ class CustomContainer extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(15.h),
-          width: 160.w,
+          width: 180.w,
           decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.1),
               borderRadius: BorderRadius.circular(15.w)),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -36,8 +36,11 @@ class CustomContainer extends StatelessWidget {
                     color: Color(0xFFF2F2F2)),
               ),
               Text(
-                price.toString(),
-                style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                "\$${price}",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Color(0xFF8C6658),
+                ),
               )
             ],
           ),

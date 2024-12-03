@@ -145,6 +145,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 60.h),
                     CustomButton(
+                      width: MediaQuery.of(context).size.width,
                       text: "Sign up",
                       onTap: () {
                         if (formKey.currentState!.validate()) {
@@ -160,6 +161,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 25.h),
                     CustomButton(
+                      width: MediaQuery.of(context).size.width,
                       text: "Sign up with google",
                       image: "assets/auth/google.png",
                       color: Colors.black.withOpacity(0.1),

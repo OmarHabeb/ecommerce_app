@@ -136,6 +136,7 @@ class RecoverPasswordScreen extends StatelessWidget {
                       height: 50.h,
                     ),
                     CustomButton(
+                      width: MediaQuery.of(context).size.width,
                       text: "Continue",
                       onTap: () {
                         if (formKey.currentState!.validate()) {

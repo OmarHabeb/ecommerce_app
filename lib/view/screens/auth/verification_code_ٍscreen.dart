@@ -81,6 +81,7 @@ class _verification_codeState extends State<verification_code> {
                         }
                       },
                       child: CustomButton(
+                        width: MediaQuery.of(context).size.width,
                         text: "Next",
                       )))
             ],

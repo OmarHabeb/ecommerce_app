@@ -115,7 +115,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                         ));
                       }
                     },
-                    child: CustomButton(text: "Go to signin again", )),
+                    child: CustomButton(text: "Go to signin again",width: MediaQuery.of(context).size.width, ), ),
               )
             ],
           ),
