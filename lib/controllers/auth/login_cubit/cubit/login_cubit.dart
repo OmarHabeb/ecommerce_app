@@ -10,7 +10,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
    static LoginCubit get(context) => BlocProvider.of(context);
-   CacheHelper cacheHelper = CacheHelper();
+  //  CacheHelper cacheHelper = CacheHelper();
      Future<void> loginUserWithEmail({required String email, required String password}) async {
       emit(onLoginLoading());
     try {
@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
           .then(
         (value) async {
           log(await value.session!.accessToken);
-          cacheHelper.setData(key: "userToken", value: value.session!.accessToken);
+          // cacheHelper.setData(key: "userToken", value: value.session!.accessToken);
           emit(onLoginSuccess());
         },
       );

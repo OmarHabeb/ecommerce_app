@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
+import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:ecommerce_app/view/screens/app/home/home/custom_container.dart';
 import 'package:ecommerce_app/view/screens/app/home/popular_shoes_screen.dart';
 import 'package:ecommerce_app/view/screens/app/home/productsDetials/product_detials_screen.dart';
@@ -75,73 +76,117 @@ class HomeScreen extends StatelessWidget {
                   var cubit = ProductsCubit.get(context);
                   cubit.getProducts();
                   return state is GetProcuctsSuccess
-                      ? Container(
-                          height: 260.h,
-                          width: MediaQuery.of(context).size.width,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 2,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  NavigationHelper.goTo(
-                                      context,
-                                      ProductDetialsScreen(
-                                        index: index,
-                                      ));
+                      ? Column(
+                          children: [
+                            Container(
+                              height: 270,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 2,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      NavigationHelper.goTo(
+                                          context,
+                                          ProductDetialsScreen(
+                                            index: index,
+                                          ));
+                                    },
+                                    child: CustomContainer(
+                                      image: cubit.products[index].imageUrl!,
+                                      title: cubit.products[index].name!,
+                                      price: cubit.products[index].price!,
+                                    ),
+                                  );
                                 },
-                                child: CustomContainer(
-                                  image: cubit.products[index].imageUrl!,
-                                  title: cubit.products[index].name!,
-                                  price: cubit.products[index].price!,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width: 15.w,
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "New Arrivals",
+                                  style: TextStyle(
+                                      fontSize: 16.sp, color: Colors.white),
                                 ),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return SizedBox(
-                                width: 15.w,
-                              );
-                            },
-                          ))
-                      : Container(
-                          width: 100,
-                          height: 100,
-                          color: Colors.white,
-                          child: Center(child: CircularProgressIndicator()),
-                        );
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    "See all",
+                                    style: TextStyle(
+                                        color: Color(0xFF8C6658),
+                                        fontSize: 16.sp),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                NavigationHelper.goTo(
+                                    context, ProductDetialsScreen(index: 3));
+                              },
+                              child: Container(
+                                height: 120.h,
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.w),
+                                  color: Colors.black.withOpacity(0.1),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          cubit.products[3].name!,
+                                          style: TextStyle(
+                                            color: textWhiteColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          "\$${cubit.products[3].price}",
+                                          style: TextStyle(
+                                              color: secondPrimaryColor,
+                                              fontSize: 20.sp),
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 100.w,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(cubit
+                                                  .products[3].imageUrl
+                                                  .toString()))),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      : Center(child: CircularProgressIndicator());
                 },
               ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "New Arrivals",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "See all",
-                      style:
-                          TextStyle(color: Color(0xFF8C6658), fontSize: 16.sp),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                height: 120.h,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.w),
-                    color: Colors.black.withOpacity(0.1)),
-              )
             ],
           ),
         ),

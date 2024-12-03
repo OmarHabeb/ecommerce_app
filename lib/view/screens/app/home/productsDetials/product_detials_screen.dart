@@ -14,7 +14,8 @@ class ProductDetialsScreen extends StatelessWidget {
   ValueNotifier<int> isSelected = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<ProductsCubit, ProductsState>(
+    return Scaffold(
+      body: BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         var cubit = ProductsCubit.get(context);
         cubit.getProducts();

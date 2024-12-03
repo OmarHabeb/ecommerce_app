@@ -34,6 +34,8 @@ class CustomContainer extends StatelessWidget {
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFFF2F2F2)),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 "\$${price}",
@@ -59,6 +61,13 @@ class CustomContainer extends StatelessWidget {
             child: IconButton(onPressed: () {}, icon: Icon(Icons.add)),
           ),
         ),
+        Positioned(
+            right: 15,
+            top: 15,
+            child: IconButton(
+              icon: Icon(Icons.favorite_border),
+              onPressed: () {},
+            ))
       ],
     );
   }
