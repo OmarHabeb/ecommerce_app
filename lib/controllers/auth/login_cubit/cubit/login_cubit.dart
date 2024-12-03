@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ecommerce_app/core/helpers/shared_preference_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,7 +10,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
    static LoginCubit get(context) => BlocProvider.of(context);
-
+   CacheHelper cacheHelper = CacheHelper();
      Future<void> loginUserWithEmail({required String email, required String password}) async {
       emit(onLoginLoading());
     try {
@@ -18,6 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
           .then(
         (value) async {
           log(await value.session!.accessToken);
+          cacheHelper.setData(key: "userToken", value: value.session!.accessToken);
           emit(onLoginSuccess());
         },
       );
