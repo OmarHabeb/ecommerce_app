@@ -9,38 +9,45 @@ part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
-   static LoginCubit get(context) => BlocProvider.of(context);
-  //  CacheHelper cacheHelper = CacheHelper();
-     Future<void> loginUserWithEmail({required String email, required String password}) async {
-      emit(onLoginLoading());
+  static LoginCubit get(context) => BlocProvider.of(context);
+  CacheHelper cacheHelper = CacheHelper();
+  Future<void> loginUserWithEmail(
+      {required String email, required String password}) async {
+    emit(onLoginLoading());
     try {
       await Supabase.instance.client.auth
           .signInWithPassword(password: password, email: email)
           .then(
         (value) async {
           log(await value.session!.accessToken);
-          // cacheHelper.setData(key: "userToken", value: value.session!.accessToken);
+          cacheHelper.setData(
+              key: "userToken", value: value.session!.accessToken);
           emit(onLoginSuccess());
         },
       );
     } on AuthException catch (authError) {
-      emit(onLoginFailure("${authError.message} \nError code: ", errorCode:  authError.statusCode));
-    }  on Exception catch (e) {
-    emit(onLoginFailure("An unexpected error occurred: ${e.toString()}", ));
-  }
+      emit(onLoginFailure("${authError.message} \nError code: ",
+          errorCode: authError.statusCode));
+    } on Exception catch (e) {
+      emit(onLoginFailure(
+        "An unexpected error occurred: ${e.toString()}",
+      ));
+    }
   }
 
-   Future<void> loginUserWithGoogle() async {
-      emit(onLoginLoading());
+  Future<void> loginUserWithGoogle() async {
+    emit(onLoginLoading());
     try {
       await Supabase.instance.client.auth.signInWithOAuth(OAuthProvider.google);
-   
-    } on AuthException catch (authError){
+    } on AuthException catch (authError) {
       emit(onLoginFailure("Login Error: ${authError.message}"));
     } on Exception catch (e) {
-    emit(onLoginFailure("An unexpected error occurred: ${e.toString()}"));
-  }
+      emit(onLoginFailure("An unexpected error occurred: ${e.toString()}"));
+    }
   }
 
- 
+  logoutUser() async {
+    await Supabase.instance.client.auth.signOut();
+     cacheHelper.deleteData(key: "userToken");
+  }
 }
