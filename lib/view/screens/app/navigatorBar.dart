@@ -41,19 +41,18 @@ class _navigatorState extends State<navigator> {
               icon: Icon(Icons.card_travel),
               title: Text('Cart'),
               backgroundColorOpacity: 0.1,
-              activeColor: Color(0xFFA8886C),
-              activeTitleColor: Color(0xFFA8886C).withOpacity(0.7)),
+              activeColor: Colors.green,
+              activeTitleColor: Colors.green),
           BottomBarItem(
             icon: Icon(Icons.person),
             title: Text('Profile'),
-            activeColor: Colors.black,
-            activeIconColor: Colors.black,
-            activeTitleColor: Colors.black,
+            activeColor: Colors.blue,
+            activeIconColor: Colors.blue,
+            activeTitleColor: Colors.blue,
           ),
         ],
       ),
       body: PageView(
-
         controller: _pageController,
         children: [
           HomeScreen(),
