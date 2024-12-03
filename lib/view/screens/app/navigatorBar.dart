@@ -2,7 +2,6 @@ import 'package:bottom_bar/bottom_bar.dart';
 import 'package:ecommerce_app/view/screens/app/cart/cart_screen.dart';
 import 'package:ecommerce_app/view/screens/app/favorite/favorite_screen.dart';
 import 'package:ecommerce_app/view/screens/app/home/home/home_screen.dart';
-import 'package:ecommerce_app/view/screens/app/notification/notification_screen.dart';
 import 'package:ecommerce_app/view/screens/app/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 

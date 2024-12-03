@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
+import 'package:ecommerce_app/view/screens/app/home/home/home_screen.dart';
+import 'package:ecommerce_app/view/screens/app/navigatorBar.dart';
 import 'package:ecommerce_app/view/screens/auth/create_account_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/recover_password_screen.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
@@ -37,7 +39,7 @@ class SigninScreen extends StatelessWidget {
               } else if (state is onLoginSuccess) {
                 Navigator.of(context, rootNavigator: true).pop();
                 // NAVIGATE TO HOME SCREEN
-                // NavigationHelper.goTo(context, ());
+                NavigationHelper.goTo(context, navigator());
               } else if (state is onLoginFailure) {
                 Navigator.of(context, rootNavigator: true).pop();
 

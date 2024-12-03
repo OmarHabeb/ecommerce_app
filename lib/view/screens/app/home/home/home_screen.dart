@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                           width: 100,
                           height: 100,
                           color: Colors.white,
-                          child: Center(child: Text("error")),
+                          child: Center(child: CircularProgressIndicator()),
                         );
                 },
               ),

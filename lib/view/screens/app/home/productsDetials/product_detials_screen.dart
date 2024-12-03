@@ -81,9 +81,9 @@ class ProductDetialsScreen extends StatelessWidget {
                                                   shape: BoxShape.circle,
                                                   border: Border.all(
                                                       color:
-                                                          secondPrimrieColor),
+                                                          secondPrimaryColor),
                                                   color: value == index
-                                                      ? secondPrimrieColor
+                                                      ? secondPrimaryColor
                                                       : Colors.transparent),
                                               child: Center(
                                                 child: Text(
@@ -109,7 +109,7 @@ class ProductDetialsScreen extends StatelessWidget {
                                 Text(
                                   "\$ ${get.price}",
                                   style: TextStyle(
-                                    color: secondPrimrieColor,
+                                    color: secondPrimaryColor,
                                     fontSize: 20.sp,
                                     fontWeight: FontWeight.bold,
                                   ),

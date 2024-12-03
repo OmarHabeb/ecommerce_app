@@ -12,7 +12,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
     url: 'https://yrbsbxbmzjkyzrxxillg.supabase.co/',
     anonKey:
@@ -45,12 +44,13 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         child: MaterialApp(
           theme: ThemeData(
+            primaryIconTheme: IconThemeData(color: Color(0xFFF2F2F2)  ),
             scaffoldBackgroundColor: Color(0xFF1A1A1A),
             appBarTheme: AppBarTheme(color: Color(0xFF1A2530)),
             iconTheme: IconThemeData(color: Colors.white),
           ),
           debugShowCheckedModeBanner: false,
-          home: navigator(),
+          home: OnboardingScreen(),
         ),
       ),
     );

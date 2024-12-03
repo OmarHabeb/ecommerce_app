@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/controllers/auth/signup_cubit/cubit/signup_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
+import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:ecommerce_app/view/screens/auth/signin_screen.dart';
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
@@ -91,6 +92,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 50.h),
                     CustomTextField(
+                        prefix: Icon(Icons.person,),
                       obscureText: false,
                       controller: userNameController,
                       labelText: "Your Name",
@@ -103,6 +105,7 @@ class CreateAccountScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 30.h),
                     CustomTextField(
+                        prefix: Icon(Icons.email,),
                       obscureText: false,
                       controller: emailController,
                       labelText: "Email Address",
@@ -122,6 +125,7 @@ class CreateAccountScreen extends StatelessWidget {
                       valueListenable: isPasswordVisible,
                       builder: (context, isVisible, child) {
                         return CustomTextField(
+                          prefix: Icon(Icons.lock,),
                           controller: passwordController,
                           labelText: "Password",
                           validator: (value) {
@@ -138,7 +142,7 @@ class CreateAccountScreen extends StatelessWidget {
                             onTap: () => isPasswordVisible.value = !isVisible,
                             child: Icon(isVisible
                                 ? Icons.visibility
-                                : Icons.visibility_off),
+                                : Icons.visibility_off, color: iconPrimaryColor,),
                           ),
                         );
                       },
@@ -146,6 +150,7 @@ class CreateAccountScreen extends StatelessWidget {
                     SizedBox(height: 60.h),
                     CustomButton(
                       width: MediaQuery.of(context).size.width,
+                    
                       text: "Sign up",
                       onTap: () {
                         if (formKey.currentState!.validate()) {

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,19 +22,23 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       style: TextStyle(color: Colors.white),
+      
       validator: validator,
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
+
         labelText: labelText,
         labelStyle: TextStyle(color: Colors.white),
         prefixIcon: prefix != null ? prefix : null,
         suffixIcon: ic != null ? ic : null,
+        suffixIconColor: iconPrimaryColor,
+        prefixIconColor: iconPrimaryColor,
         hintStyle: TextStyle(
           color: Colors.white,
           fontSize: 16.sp,
         ),
-        fillColor: Color(0xFF8C6658),
+        fillColor: secondPrimaryColor,
         filled: true,
         contentPadding: EdgeInsets.symmetric(
           vertical: 18.h,
