@@ -11,3 +11,5 @@ final class GetProcuctsSuccess extends ProductsState {
 }
 
 final class GetProcuctsError extends ProductsState {}
+final class GetProcuctsloading extends ProductsState {}
+final class SearchState extends ProductsState {}

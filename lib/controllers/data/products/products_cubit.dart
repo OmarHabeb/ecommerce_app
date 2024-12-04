@@ -40,4 +40,12 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(GetProcuctsError());
     }
   }
+
+  List<ProductsModel> searchProducts = [];
+  void search(String text) {
+    searchProducts = products
+        .where((e) => e.name!.toLowerCase().contains(text.toLowerCase()))
+        .toList();
+    emit(SearchState());
+  }
 }

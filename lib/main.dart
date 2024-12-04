@@ -18,7 +18,7 @@ void main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlyYnNieGJtempreXpyeHhpbGxnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MjM5MjYsImV4cCI6MjA0ODM5OTkyNn0.c2HlDfegiIC74qCef8hwrQUwvHsV680Bm5sYWa1qgSE', // Use the anon public key from your Supabase project
   );
-  // await CacheHelper.cachIntialization();
+  await CacheHelper.cachIntialization();
   runApp(const MyApp());
 }
 
@@ -58,8 +58,8 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: Colors.white),
               ),
               debugShowCheckedModeBanner: false,
-              // home:  cubit.cacheHelper.getData(key: "userToken") == null ? OnboardingScreen() : navigator(),
-              home: navigator(),
+              home:  cubit.cacheHelper.getData(key: "userToken") == null ? OnboardingScreen() : navigator(),
+              // home: navigator(),
             );
           },
         ),
