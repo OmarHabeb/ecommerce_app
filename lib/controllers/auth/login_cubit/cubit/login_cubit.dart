@@ -11,6 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
   static LoginCubit get(context) => BlocProvider.of(context);
   CacheHelper cacheHelper = CacheHelper();
+  String? userId;
   Future<void> loginUserWithEmail(
       {required String email, required String password}) async {
     emit(onLoginLoading());
@@ -20,6 +21,8 @@ class LoginCubit extends Cubit<LoginState> {
           .then(
         (value) async {
           log(await value.session!.accessToken);
+          userId = await value.session!.user.id;
+              log(userId.toString());
           cacheHelper.setData(
               key: "userToken", value: value.session!.accessToken);
           emit(onLoginSuccess());
@@ -45,7 +48,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(onLoginFailure("An unexpected error occurred: ${e.toString()}"));
     }
   }
-
+  
   logoutUser() async {
     await Supabase.instance.client.auth.signOut();
      cacheHelper.deleteData(key: "userToken");

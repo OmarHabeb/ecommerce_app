@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
 import 'package:ecommerce_app/controllers/features/profile_cubit/cubit/profile_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
-import 'package:ecommerce_app/view/screens/app/navigatorBar.dart';
+import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:ecommerce_app/view/screens/app/profile/custom_container_account_setting.dart';
 import 'package:ecommerce_app/view/screens/app/profile/edit_profile_screen.dart';
 import 'package:ecommerce_app/view/screens/auth/signin_screen.dart';
@@ -23,12 +23,27 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 100.w,
-                  height: 100.h,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50.w)),
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                        if (state is ProfileSuccess) {
+                      final user = state.user;
+                      final userPath = user.userMetadata!;
+                      return Container(
+                                  width: 100.w,
+                                  height: 100.h,
+                                  decoration: BoxDecoration(
+                                      color: secondPrimaryColor,
+                                     shape: BoxShape.circle ),
+                                      child: Center(
+                                        child:   Text(  userPath["display_name"][0].toString(), style: TextStyle(
+                                          color: iconPrimaryColor,
+                                          fontSize: 50
+                                        ),)
+                                      ),
+                                );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
                 ),
                 SizedBox(
                   height: 30.h,

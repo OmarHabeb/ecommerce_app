@@ -2,6 +2,8 @@ import 'package:ecommerce_app/controllers/auth/forget_password_cubit/cubit/forge
 import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
 import 'package:ecommerce_app/controllers/auth/signup_cubit/cubit/signup_cubit.dart';
 import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
+import 'package:ecommerce_app/controllers/features/cart_cubit/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/controllers/features/favorite_cubit/cubit/favorite_cubit.dart';
 import 'package:ecommerce_app/controllers/features/profile_cubit/cubit/profile_cubit.dart';
 import 'package:ecommerce_app/core/helpers/shared_preference_helper.dart';
 import 'package:ecommerce_app/view/screens/app/navigatorBar.dart';
@@ -18,7 +20,7 @@ void main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlyYnNieGJtempreXpyeHhpbGxnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI4MjM5MjYsImV4cCI6MjA0ODM5OTkyNn0.c2HlDfegiIC74qCef8hwrQUwvHsV680Bm5sYWa1qgSE', // Use the anon public key from your Supabase project
   );
-  // await CacheHelper.cachIntialization();
+  await CacheHelper.cachIntialization();
   runApp(const MyApp());
 }
 
@@ -28,6 +30,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+         BlocProvider(
+          create: (context) => CartCubit(),
+        ),
+         BlocProvider(
+          create: (context) => FavoriteCubit(),
+        ),
         BlocProvider(
           create: (context) => SignupCubit(),
         ),
@@ -58,8 +66,7 @@ class MyApp extends StatelessWidget {
                 iconTheme: IconThemeData(color: Colors.white),
               ),
               debugShowCheckedModeBanner: false,
-              // home:  cubit.cacheHelper.getData(key: "userToken") == null ? OnboardingScreen() : navigator(),
-              home: navigator(),
+              home:  cubit.cacheHelper.getData(key: "userToken") == null ? OnboardingScreen() : navigator(),
             );
           },
         ),

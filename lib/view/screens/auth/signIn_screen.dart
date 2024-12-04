@@ -39,7 +39,7 @@ class SigninScreen extends StatelessWidget {
               } else if (state is onLoginSuccess) {
                 Navigator.of(context, rootNavigator: true).pop();
                 // NAVIGATE TO HOME SCREEN
-                NavigationHelper.goTo(context, navigator());
+                NavigationHelper.goOffAll(context, navigator());
               } else if (state is onLoginFailure) {
                 Navigator.of(context, rootNavigator: true).pop();
 
