@@ -2,6 +2,7 @@ import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
 import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:ecommerce_app/model/product_model.dart';
+import 'package:ecommerce_app/view/screens/app/cart/cart_screen.dart';
 import 'package:ecommerce_app/view/screens/app/home/home/custom_container.dart';
 import 'package:ecommerce_app/view/screens/app/home/productsDetials/product_detials_screen.dart';
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
@@ -25,6 +26,13 @@ class PopularShoesScreen extends StatelessWidget {
           "Popular Shoes",
           style: TextStyle(color: textWhiteColor),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                NavigationHelper.goTo(context, CartScreen());
+              },
+              icon: Icon(Icons.card_travel))
+        ],
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -34,6 +42,7 @@ class PopularShoesScreen extends StatelessWidget {
           child: Column(
             children: [
               TextField(
+                style: TextStyle(color: Colors.white),
                 onChanged: (value) {
                   cubit.search(value);
                 },
@@ -92,6 +101,7 @@ class PopularShoesScreen extends StatelessWidget {
                           image: get.imageUrl.toString(),
                           price: get.price!,
                           title: get.name.toString(),
+                          index: index,
                         ),
                       );
                     },

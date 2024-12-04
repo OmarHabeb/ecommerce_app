@@ -1,3 +1,6 @@
+import 'package:ecommerce_app/controllers/auth/cart/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
+import 'package:ecommerce_app/controllers/features/favorite_cubit/cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,8 +8,12 @@ class CustomContainer extends StatelessWidget {
   final String image;
   final String title;
   final double price;
+  final int index;
   CustomContainer(
-      {required this.image, required this.title, required this.price});
+      {required this.image,
+      required this.title,
+      required this.price,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +65,13 @@ class CustomContainer extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(7),
                     bottomRight: Radius.circular(15))),
-            child: IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+            child: IconButton(
+                onPressed: () {
+                  var cubit = CartCubit.get(context);
+                  var cubit2 = ProductsCubit.get(context);
+                  cubit.addToCart(cubit2.products[index]);
+                },
+                icon: Icon(Icons.add)),
           ),
         ),
         Positioned(
@@ -66,7 +79,11 @@ class CustomContainer extends StatelessWidget {
             top: 15,
             child: IconButton(
               icon: Icon(Icons.favorite_border),
-              onPressed: () {},
+              onPressed: () {
+                var cubit = FavoriteCubit.get(context);
+                var cubit2 = ProductsCubit.get(context);
+                cubit.addToCart(cubit2.products[index]);
+              },
             ))
       ],
     );

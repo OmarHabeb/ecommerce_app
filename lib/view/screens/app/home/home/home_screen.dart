@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Hola",
+                    "Welcome",
                     style: TextStyle(color: Colors.white, fontSize: 40.sp),
                   ),
                   Container(
@@ -96,6 +96,7 @@ class HomeScreen extends StatelessWidget {
                                       image: cubit.products[index].imageUrl!,
                                       title: cubit.products[index].name!,
                                       price: cubit.products[index].price!,
+                                      index: index,
                                     ),
                                   );
                                 },
@@ -146,9 +147,9 @@ class HomeScreen extends StatelessWidget {
                                   color: Colors.black.withOpacity(0.1),
                                 ),
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Column(
                                       mainAxisAlignment:
@@ -161,22 +162,27 @@ class HomeScreen extends StatelessWidget {
                                           style: TextStyle(
                                             color: textWhiteColor,
                                           ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
                                           "\$${cubit.products[3].price}",
                                           style: TextStyle(
                                               color: secondPrimaryColor,
                                               fontSize: 20.sp),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                         )
                                       ],
                                     ),
                                     Container(
-                                      width: 100.w,
+                                      width: 80.w,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
-                                              image: NetworkImage(cubit
-                                                  .products[3].imageUrl
-                                                  .toString()))),
+                                        image: NetworkImage(cubit
+                                            .products[3].imageUrl
+                                            .toString()),
+                                      )),
                                     )
                                   ],
                                 ),

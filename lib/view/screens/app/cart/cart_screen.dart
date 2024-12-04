@@ -1,7 +1,7 @@
-import 'package:ecommerce_app/controllers/auth/login_cubit/cubit/login_cubit.dart';
-import 'package:ecommerce_app/controllers/features/cart_cubit/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/controllers/auth/cart/cubit/cart_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
 import 'package:ecommerce_app/view/screens/app/cart/checkout_screen.dart';
+import 'package:ecommerce_app/view/screens/app/home/home/custom_container.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,129 +12,117 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = CartCubit.get(context);
+
     return Scaffold(
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(10.r),
         margin: EdgeInsets.only(right: 15, left: 15),
-        height: 206.h,
+        height: 215.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
             color: Colors.black.withOpacity(0.1)),
-        child: BlocBuilder<CartCubit, CartState>(
-          builder: (context, state) {
-            var cartCubit = CartCubit.get(context);
-            return Column(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(15.r),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Sub-Total",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text("Delivery Charge",
-                              style: TextStyle(color: Colors.white)),
-                          Text("Discount",
-                              style: TextStyle(color: Colors.white)),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text("Total",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.sp)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(15.r),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "\$0",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text("\$10", style: TextStyle(color: Colors.white)),
-                          Text("\$0", style: TextStyle(color: Colors.white)),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text("\$0",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.sp)),
-                        ],
-                      ),
-                    )
-                  ],
+                Container(
+                  padding: EdgeInsets.all(15.r),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Sub-Total", style: TextStyle(color: Colors.white)),
+                      Text("Delivery Charge",
+                          style: TextStyle(color: Colors.white)),
+                      Text("Discount", style: TextStyle(color: Colors.white)),
+                      SizedBox(height: 10.h),
+                      Text("Total",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.sp)),
+                    ],
+                  ),
                 ),
-                InkWell(
-                    onTap: () {
-                      NavigationHelper.goTo(context, CheckoutScreen());
-                    },
-                    child: CustomButton(
-                        text: "Checkout",
-                        width: MediaQuery.of(context).size.width))
+                Container(
+                  padding: EdgeInsets.all(15.r),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BlocBuilder<CartCubit, CartState>(
+                        builder: (context, state) {
+                          return Text(
+                            "\$${cubit.totalPrice.toStringAsFixed(2)}",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp),
+                          );
+                        },
+                      ),
+                      Text("\$10", style: TextStyle(color: Colors.white)),
+                      Text("\$0", style: TextStyle(color: Colors.white)),
+                      SizedBox(height: 10.h),
+                      BlocBuilder<CartCubit, CartState>(
+                        builder: (context, state) {
+                          return Text(
+                            "\$${cubit.totalPriceWithDelivery.toStringAsFixed(2)}",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                )
               ],
-            );
-          },
+            ),
+            InkWell(
+                onTap: () {
+                  NavigationHelper.goTo(context, CheckoutScreen());
+                },
+                child: CustomButton(
+                    text: "Checkout", width: MediaQuery.of(context).size.width))
+          ],
         ),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: BlocBuilder<CartCubit, CartState>(
-            builder: (context, state) {
-              var cartCubit = CartCubit.get(context);
-              return BlocBuilder<LoginCubit, LoginState>(
+        child: Container(
+          padding: EdgeInsets.all(15.w),
+          margin: EdgeInsets.only(top: 30.w),
+          child: Column(
+            children: [
+              SizedBox(height: 15.h),
+              BlocBuilder<CartCubit, CartState>(
                 builder: (context, state) {
-                  var loginCubit = LoginCubit.get(context);
-
-                  if (loginCubit.userId == null) {
-                    return Center(child: Text("User not logged in"));
+                  if (cubit.cartItems.isEmpty) {
+                    return Center(child: Text("No items in the cart"));
                   }
-
-                  return FutureBuilder<List<dynamic>>(
-                    future: cartCubit.fetchCart(loginCubit.userId.toString()),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-
-                      if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      }
-
-                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('Your cart is empty.'));
-                      }
-
-                      var cartItems = snapshot.data!;
-
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: cartItems.length,
-                        itemBuilder: (context, index) {
-                          var item = cartItems[index];
-                          return ListTile(
-                            title: Text(item['product_name']),
-                            subtitle: Text('Quantity: ${item['quantity']}'),
-                            trailing: Text('\$${item['product_price']}'),
-                          );
-                        },
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final get = cubit.cartItems[index];
+                      return CustomContainer(
+                        image: get.imageUrl.toString(),
+                        price: get.price!,
+                        title: get.name.toString(),
+                        index: index,
                       );
                     },
+                    itemCount: cubit.cartItems.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 150.w / 200.h),
                   );
                 },
-              );
-            },
+              ),
+            ],
           ),
         ),
       ),

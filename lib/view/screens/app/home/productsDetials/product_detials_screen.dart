@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controllers/auth/cart/cubit/cart_cubit.dart';
 import 'package:ecommerce_app/controllers/data/products/products_cubit.dart';
 import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:ecommerce_app/view/screens/app/home/productsDetials/data.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetialsScreen extends StatelessWidget {
+  
   final int index;
 
   ProductDetialsScreen({required this.index});
@@ -14,8 +16,7 @@ class ProductDetialsScreen extends StatelessWidget {
   ValueNotifier<int> isSelected = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<ProductsCubit, ProductsState>(
+    return Scaffold(body: BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         var cubit = ProductsCubit.get(context);
         cubit.getProducts();
@@ -73,7 +74,7 @@ class ProductDetialsScreen extends StatelessWidget {
                                         builder: (context, value, _) {
                                           return GestureDetector(
                                             onTap: () {
-                                             isSelected.value = index ;
+                                              isSelected.value = index;
                                             },
                                             child: Container(
                                               width: 50.w,
@@ -116,6 +117,11 @@ class ProductDetialsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 CustomButton(
+                                  onTap: () {
+                    var cubit = CartCubit.get(context);
+                  var cubit2 = ProductsCubit.get(context);
+                  cubit.addToCart(cubit2.products[index]);
+                                  },
                                   text: "Add to cart",
                                   width: 200,
                                 ),

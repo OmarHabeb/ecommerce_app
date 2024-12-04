@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controllers/features/profile_cubit/cubit/profile_cubit.dart';
 import 'package:ecommerce_app/core/helpers/navigation_helper.dart';
 import 'package:ecommerce_app/core/style/colors.dart';
 import 'package:ecommerce_app/view/screens/app/home/home/home_screen.dart';
@@ -6,6 +7,7 @@ import 'package:ecommerce_app/view/screens/app/profile/custom_container_account_
 import 'package:ecommerce_app/view/widgets/back_arrow_button.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -13,6 +15,7 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfileCubit.get(context).fetchUser();
     return Scaffold(
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(10.r),
@@ -131,33 +134,42 @@ class CheckoutScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15.w)),
-              child: Column(
-                children: [
-                  CustomContainerAccountSetting(
-                    icon: Icon(Icons.email),
-                    text: "opjsadjasod@gmail.com",
-                  ),
-                  CustomContainerAccountSetting(
-                    icon: Icon(Icons.phone),
-                    text: "0000000000",
-                  ),
-                  CustomContainerAccountSetting(
-                    icon: Icon(Icons.build),
-                    text: "uuuhhuhkijijjyjh",
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.attach_money,
-                      color: textWhiteColor,
-                    ),
-                    title: Text(
-                      "Paypal Card",
-                      style: TextStyle(color: textWhiteColor),
-                    ),
-                    subtitle: Text("kaljsdkjasd"),
-                    trailing: Icon(Icons.keyboard_arrow_right_outlined),
-                  )
-                ],
+              child: BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  if (state is ProfileSuccess) {
+                    final user = state.user;
+                    final userPath = user.userMetadata!;
+                    return Column(
+                      children: [
+                        CustomContainerAccountSetting(
+                          icon: Icon(Icons.email),
+                          text: userPath["email"],
+                        ),
+                        CustomContainerAccountSetting(
+                          icon: Icon(Icons.phone),
+                          text: "01017160588",
+                        ),
+                        CustomContainerAccountSetting(
+                          icon: Icon(Icons.location_on),
+                          text: "Egypt, Cairo, Nasr City",
+                        ),
+                        ListTile(
+                          leading: Icon(
+                            Icons.attach_money,
+                            color: textWhiteColor,
+                          ),
+                          title: Text(
+                            "Paypal Card",
+                            style: TextStyle(color: textWhiteColor),
+                          ),
+                          subtitle: Text("23*******"),
+                          trailing: Icon(Icons.keyboard_arrow_right_outlined),
+                        )
+                      ],
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
               ),
             )),
       ),
